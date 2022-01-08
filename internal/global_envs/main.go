@@ -8,9 +8,9 @@ import (
 )
 
 func CheckGlobalEnvs() {
-	fmt.Printf("Checking for necessary basic global configurations... \n\n")
+	fmt.Printf("Checking for necessary basic environment variables... \n\n")
 
-	envVariables := [...]string{"GITHUB_TOKEN", "NEXUS_USERNAME", "NEXUS_PASSWORD"}
+	envVariables := [...]string{"NEXUS_USERNAME", "NEXUS_PASSWORD"}
 
 	for _, value := range envVariables {
 		_, present := os.LookupEnv(value)

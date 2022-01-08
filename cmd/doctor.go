@@ -1,25 +1,36 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 
-	. "internal/gcloud"
+	cli_access "internal/cli_access"
 	. "internal/global_envs"
 )
 
 // doctorCmd represents the doctor command
 var doctorCmd = &cobra.Command{
 	Use:   "doctor",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Check for necessary Jusbrasil configuration",
+	Long: `Check for necessary Jusbrasil configuration, which are supposed to be done on onboarding`,
 	Run: func(cmd *cobra.Command, args []string) {
 		CheckGlobalEnvs()
-		CheckGCloudConfig()
+
+		gcloud := cli_access.CliType{
+			Name: "gcloud",
+			Command: []string{"gcloud", "config", "list"},
+			NotionLink: "https://www.notion.so/jusbrasil/Google-Cloud-e55cbd1e9e9c4a928fd974b1eb5d1e97",
+		}
+		cli_access.CheckConfig(gcloud)
+
+		kubectl := cli_access.CliType{
+			Name: "kubectl",
+			Command: []string{"kubectl", "config", "view"},
+			NotionLink: "https://www.notion.so/jusbrasil/Kubernetes-63bf1083f9b44888ade0a3ae246fd036",
+		}
+		cli_access.CheckConfig(kubectl)
+
+		fmt.Println("\nAll configuration is set properly!")
 	},
 }
 
