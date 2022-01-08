@@ -2,33 +2,33 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 
-	cli_access "internal/cli_access"
-	. "internal/global_envs"
+	doctor "jus-cli/internal/doctor"
 )
 
 // doctorCmd represents the doctor command
 var doctorCmd = &cobra.Command{
 	Use:   "doctor",
 	Short: "Check for necessary Jusbrasil configuration",
-	Long: `Check for necessary Jusbrasil configuration, which are supposed to be done on onboarding`,
+	Long:  `Check for necessary Jusbrasil configuration, which are supposed to be done on onboarding`,
 	Run: func(cmd *cobra.Command, args []string) {
-		CheckGlobalEnvs()
+		doctor.CheckGlobalEnvs()
 
-		gcloud := cli_access.CliType{
-			Name: "gcloud",
-			Command: []string{"gcloud", "config", "list"},
+		gcloud := doctor.CliType{
+			Name:       "gcloud",
+			Command:    []string{"gcloud", "config", "list"},
 			NotionLink: "https://www.notion.so/jusbrasil/Google-Cloud-e55cbd1e9e9c4a928fd974b1eb5d1e97",
 		}
-		cli_access.CheckConfig(gcloud)
+		doctor.CheckConfig(gcloud)
 
-		kubectl := cli_access.CliType{
-			Name: "kubectl",
-			Command: []string{"kubectl", "config", "view"},
+		kubectl := doctor.CliType{
+			Name:       "kubectl",
+			Command:    []string{"kubectl", "config", "view"},
 			NotionLink: "https://www.notion.so/jusbrasil/Kubernetes-63bf1083f9b44888ade0a3ae246fd036",
 		}
-		cli_access.CheckConfig(kubectl)
+		doctor.CheckConfig(kubectl)
 
 		fmt.Println("\nAll configuration is set properly!")
 	},

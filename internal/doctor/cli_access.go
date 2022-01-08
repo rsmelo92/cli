@@ -1,4 +1,4 @@
-package cli_access
+package doctor
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 
 	"github.com/briandowns/spinner"
 
-	. "internal/utils"
+	utils "jus-cli/internal/utils"
 )
 
 type CliType struct {
@@ -38,7 +38,7 @@ func validateOutput(output string, cliType CliType) {
 		throwError(nil, cliType.NotionLink)
 	}
 
-	OutputSuccess(fmt.Sprintf("%s configuration is set properly", cliType.Name))
+	utils.OutputSuccess(fmt.Sprintf("%s configuration is set properly", cliType.Name))
 }
 
 func CheckConfig(cliType CliType) {
@@ -61,6 +61,6 @@ func CheckConfig(cliType CliType) {
 
 	s.Stop()
 
-	OutputSuccess(fmt.Sprintf("%s installed in %s", cliType.Name, path))
+	utils.OutputSuccess(fmt.Sprintf("%s installed in %s", cliType.Name, path))
 	validateOutput(string(output), cliType)
 }

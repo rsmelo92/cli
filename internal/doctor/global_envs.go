@@ -1,10 +1,10 @@
-package global_envs
+package doctor
 
 import (
 	"fmt"
 	"os"
 
-	. "internal/utils"
+	utils "jus-cli/internal/utils"
 )
 
 func CheckGlobalEnvs() {
@@ -18,6 +18,6 @@ func CheckGlobalEnvs() {
 			// Throw error and show notion docs for each environment variable
 		}
 
-		OutputSuccess(value)
+		utils.OutputSuccess(value)
 	}
 }
