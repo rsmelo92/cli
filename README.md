@@ -12,4 +12,5 @@ To run other options just add them to the command
 
 ```
 go run main.go doctor
+go run main.go ...
 ```
